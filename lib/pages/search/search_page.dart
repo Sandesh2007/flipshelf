@@ -1,3 +1,4 @@
+import 'package:flipshelf/common/temp_data.dart';
 import 'package:flipshelf/models/book.dart';
 import 'package:flipshelf/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class _SearchPageState extends State<SearchPage> {
   String _searchQuery = '';
   bool _isSearching = false;
 
-  final List<Book> books = [
+  final List<Book> recommended = [
     Book(
       id: "1",
       title: 'One Piece',
@@ -77,9 +78,9 @@ class _SearchPageState extends State<SearchPage> {
 
   List<Book> get filteredBooks {
     if (_searchQuery.isEmpty) {
-      return books;
+      return recommended;
     }
-    return books.where((book) {
+    return recommended.where((book) {
       return book.title.toLowerCase().contains(_searchQuery) ||
           book.author.toLowerCase().contains(_searchQuery);
     }).toList();
@@ -112,15 +113,19 @@ class _SearchPageState extends State<SearchPage> {
   Widget _buildTopBar(BuildContext context, ThemeProvider themeProvider) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            "Discover",
-            style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+            "Search",
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.secondary,
+            ),
           ),
-          const SizedBox(height: 8),
-          _buildEnhancedSearchBar(context),
+          IconButton(onPressed: () {}, icon: Icon(Icons.more_vert_rounded)),
         ],
       ),
     );
@@ -129,9 +134,7 @@ class _SearchPageState extends State<SearchPage> {
   Widget _buildEnhancedSearchBar(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).brightness == Brightness.dark
-            ? Colors.grey[800]
-            : Colors.grey[100],
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
@@ -166,12 +169,7 @@ class _SearchPageState extends State<SearchPage> {
                   ),
                   onPressed: _clearSearch,
                 )
-              : Icon(
-                  Icons.mic,
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? Colors.grey[400]
-                      : Colors.grey[500],
-                ),
+              : null,
           border: InputBorder.none,
           contentPadding: const EdgeInsets.symmetric(vertical: 16),
         ),
@@ -186,10 +184,66 @@ class _SearchPageState extends State<SearchPage> {
         physics: const BouncingScrollPhysics(),
         slivers: [
           SliverToBoxAdapter(
-            child: Padding(padding: const EdgeInsets.symmetric(horizontal: 20)),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildEnhancedSearchBar(context),
+                  SizedBox(height: 30),
+                  _buildRecentSearch(context),
+                  SizedBox(height: 30),
+                  _buildRecommended(context),
+                  SizedBox(height: 30),
+                ],
+              ),
+            ),
           ),
         ],
       ),
     );
+  }
+
+  Widget _buildRecentSearch(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          "Recent Search",
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).colorScheme.secondary,
+          ),
+        ),
+        SizedBox(height: 12),
+        Wrap(
+          spacing: 8.0,
+          runSpacing: 8.0,
+          children: recentSearches.map((search) {
+            return GestureDetector(
+              onTap: () {},
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                decoration: BoxDecoration(
+                  color: Color(0xFF2B2A37),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Text(
+                  search,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Theme.of(context).colorScheme.tertiary,
+                  ),
+                ),
+              ),
+            );
+          }).toList(),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildRecommended(BuildContext context) {
+    return Row();
   }
 }

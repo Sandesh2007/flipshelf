@@ -19,7 +19,7 @@ final lightTheme = ThemeData(
 
 final darkTheme = ThemeData(
   brightness: Brightness.dark,
-  scaffoldBackgroundColor: Color.fromRGBO(18, 18, 18, 1),
+  scaffoldBackgroundColor: Color(0xFF232530),
   primaryColor: Colors.red[600],
   fontFamily: "Poppins",
   textTheme: GoogleFonts.poppinsTextTheme().apply(
@@ -30,7 +30,7 @@ final darkTheme = ThemeData(
     primary: Colors.red[600]!,
     secondary: Colors.white,
     onSecondary: Colors.black,
-    surface: Color(0xFF121212),
+    surface: Color(0xFF2A2A36),
     onSurface: Colors.white,
     tertiary: Colors.white,
   ),
