@@ -144,25 +144,25 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     });
   }
 
-  List<Book> get filteredBooks {
-    if (_searchQuery.isEmpty) {
-      return books;
-    }
-    return books.where((book) {
-      return book.title.toLowerCase().contains(_searchQuery) ||
-          book.author.toLowerCase().contains(_searchQuery);
-    }).toList();
-  }
+  // List<Book> get filteredBooks {
+  //   if (_searchQuery.isEmpty) {
+  //     return books;
+  //   }
+  //   return books.where((book) {
+  //     return book.title.toLowerCase().contains(_searchQuery) ||
+  //         book.author.toLowerCase().contains(_searchQuery);
+  //   }).toList();
+  // }
 
-  List<Book> get filteredNewArrivals {
-    if (_searchQuery.isEmpty) {
-      return newArrivals;
-    }
-    return newArrivals.where((book) {
-      return book.title.toLowerCase().contains(_searchQuery) ||
-          book.author.toLowerCase().contains(_searchQuery);
-    }).toList();
-  }
+  // List<Book> get filteredNewArrivals {
+  //   if (_searchQuery.isEmpty) {
+  //     return newArrivals;
+  //   }
+  //   return newArrivals.where((book) {
+  //     return book.title.toLowerCase().contains(_searchQuery) ||
+  //         book.author.toLowerCase().contains(_searchQuery);
+  //   }).toList();
+  // }
 
   void _clearSearch() {
     _searchController.clear();
@@ -319,9 +319,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             ),
           ),
           // Book list
-          _buildBookSection(context, 'Featured Books', filteredBooks),
+          _buildBookSection(context, 'Featured Books', books),
           // New arrivals
-          _buildBookSection(context, 'New Arrivals', filteredNewArrivals),
+          _buildBookSection(context, 'New Arrivals', newArrivals),
           const SliverToBoxAdapter(child: SizedBox(height: 20)),
         ],
       ),

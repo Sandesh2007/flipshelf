@@ -11,4 +11,4 @@ This project is a part of my OJT(On-the-Job Training).
 
 [ ] Add Bookmark page
 
-[ ] Add Settings page
+[ ] Add Settings  

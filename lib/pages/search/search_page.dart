@@ -135,7 +135,7 @@ class _SearchPageState extends State<SearchPage> {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withAlpha(30),
+            color: Colors.black.withAlpha(50),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -173,6 +173,7 @@ class _SearchPageState extends State<SearchPage> {
                       : Colors.grey[500],
                 ),
           border: InputBorder.none,
+          contentPadding: const EdgeInsets.symmetric(vertical: 16),
         ),
         style: TextStyle(color: Theme.of(context).colorScheme.secondary),
       ),
@@ -185,12 +186,10 @@ class _SearchPageState extends State<SearchPage> {
         physics: const BouncingScrollPhysics(),
         slivers: [
           SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-            ),
-          )
+            child: Padding(padding: const EdgeInsets.symmetric(horizontal: 20)),
+          ),
         ],
-      )
-      );
+      ),
+    );
   }
 }
